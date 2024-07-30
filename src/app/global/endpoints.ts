@@ -5,8 +5,8 @@ export const auth = {
 };
 
 export const persons = {
-  get: `${environment.urlBase}GetUsuarios`,
-  insert: `${environment.urlBase}InsertPersona`,
+  get: `${environment.urlBase}GetPersonas`,
+  insert: `${environment.urlBase}InsertPersonas`,
 };
 
 export const profiles = {

@@ -17,66 +17,39 @@ import { PersonasService, StoresService, PerfilesService } from '@Services';
 export class PersonasComponent {
   private fb = inject(FormBuilder);
   private personService = inject(PersonasService);
-  private profileService = inject(PerfilesService);
-  private storeService = inject(StoresService);
 
   idUsuario:number = 0;
   persons = signal<PersonaModel[]>([]);
   personsList: PersonaModel[] = [];
-  profilesList: PerfilModel[] = [];
-  storesList: TiendaModel[] = [];
 
   form = this.fb.nonNullable.group({
     nombre: ['', [Validators.required]],
     apPaterno: ['', [Validators.required]],
     apMaterno: ['', [Validators.required]],
-    idPerfil: ['', [Validators.required]],
-    idSede: ['', [Validators.required]],
-    porcentaje: ['', [Validators.required]],
+    direccion: ['', [Validators.required]]
   });
 
   ngOnInit(): void {
     this.idUsuario = Number(localStorage.getItem('idUsuario'))
     this.getPersons();
-    this.getProfiles();
-    this.getStores();
   }
 
   getPersons() {
     this.personService.getPersons().subscribe((data) => {
-      this.persons.set(data.response.data);
-      this.personsList = data.response.data;
+      this.persons.set(data.Response.data);
+      this.personsList = data.Response.data;
     });
   }
 
-  getProfiles() {
-    this.profileService.getProfiles().subscribe((data) => {
-      this.profilesList = data.response.data;
-    });
-  }
-
-  getStores() {
-    this.storeService.getStores().subscribe((data) => {
-      this.storesList = data.response.data;
-    });
-  }
 
   onSubmit(): void {
     if (this.form.valid) {
-      const { nombre, apPaterno, apMaterno, idPerfil, idSede, porcentaje } = this.form.getRawValue();
+      const { nombre, apPaterno, apMaterno, direccion} = this.form.getRawValue();
       const request: PersonInsertRequest = {
-        Id: 0,
-        IdUsuario: 0,
         Nombre: nombre,
         ApPaterno: apPaterno,
         ApMaterno: apMaterno,
-        Perfil: Number(idPerfil),
-        IdSede: Number(idSede),
-        NombreUsuario: null,
-        NombreSede: null,
-        Usuario: this.idUsuario,
-        Activo: 0,
-        Porcentaje: Number(porcentaje)
+        Direccion: direccion
       };
       this.personService.insertPersons(request)
         .subscribe({

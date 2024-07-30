@@ -36,36 +36,11 @@
                     </div>
                     <div class="col-3">
                         <div class="form-group">
-                            <label>*Perfil:</label>
-                            <select class="form-control" formControlName="idPerfil">
-                                <option value="" selected disabled>Selecciona un Perfil</option>
-                                <option *ngFor="let perfil of profilesList" [value]="perfil.Id">{{perfil.Nombre}}</option>
-                            </select>
+                            <label>*Dirección:</label>
+                            <input type="text" class="form-control" placeholder="Dirección" formControlName="direccion">
                             <!-- <input type="text" class="form-control" placeholder="Apellido Paterno" formControlName="idPerfil"> -->
-                            <div class="form-text text-danger text-left" *ngIf="form.get('idPerfil')?.touched && form.get('idPerfil')?.invalid">
-                                <span *ngIf="form.get('idPerfil')?.errors?.['required']">Perfil Requerido*</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label>*Sede:</label>
-                            <select class="form-control" formControlName="idSede">
-                              <option value="" selected disabled>Selecciona una Sede</option>
-                              <option *ngFor="let store of storesList" [value]="store.Id">{{store.Nombre}}</option>
-                            </select>
-                            <!-- <input type="text" class="form-control" placeholder="Apellido Paterno" formControlName="idSede"> -->
-                            <div class="form-text text-danger text-left" *ngIf="form.get('idSede')?.touched && form.get('idSede')?.invalid">
-                                <span *ngIf="form.get('idSede')?.errors?.['required']">Sede Requerido*</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label>*Porcentaje:</label>
-                            <input type="text" class="form-control" placeholder="Porcentaje" formControlName="porcentaje">
-                            <div class="form-text text-danger text-left" *ngIf="form.get('porcentaje')?.touched && form.get('porcentaje')?.invalid">
-                                <span *ngIf="form.get('porcentaje')?.errors?.['required']">Porcentaje Requerido*</span>
+                            <div class="form-text text-danger text-left" *ngIf="form.get('direccion')?.touched && form.get('direccion')?.invalid">
+                                <span *ngIf="form.get('direccion')?.errors?.['required']">Dirección Requerida*</span>
                             </div>
                         </div>
                     </div>
@@ -82,8 +57,8 @@
   <div class="col-12">
     <app-custom-table
         keyRow="Id"
-        [headers]="['#','Nombre','Usuario','Sucursal']"
-        [keys]="['Id','Nombre','NombreUsuario','NombreSede']"
+        [headers]="['#','Nombre','Apellido Paterno','Apellido Materno', 'Dirección', 'Estatus', 'Usuario Registra', 'Fecha Registro']"
+        [keys]="['Id','Nombre','ApPaterno','ApMaterno', 'Direccion', 'Estatus', 'UsuarioRegistra', 'FechaRegistro']"
         [data]="personsList"
         [hasSearch]="true"
         [hasEdit]="true"

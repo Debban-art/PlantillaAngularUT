@@ -5,7 +5,7 @@
 export const environment = {
   production: true,
   // urlBase: 'https://apiloteria.derkapps.com/api/',
-  urlBase: 'https://localhost:5001/api/',
+  urlBase: 'https://localhost:5031/api/',
 };
 
 /*

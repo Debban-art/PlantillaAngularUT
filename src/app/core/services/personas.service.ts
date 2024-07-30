@@ -17,7 +17,7 @@ export class PersonasService {
 
   getPersons(): Observable<GetPersonasResponse> {
     const httpOptions = {headers:this.headers}
-    return this.http.post<GetPersonasResponse>(persons.get, null, httpOptions)
+    return this.http.get<GetPersonasResponse>(persons.get, httpOptions)
     .pipe(
       map(res => {
         return res;
