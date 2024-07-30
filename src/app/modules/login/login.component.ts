@@ -39,7 +39,7 @@ export class LoginComponent {
       this.auth.auth(request)
         .subscribe({
           next: (res) => {
-            const data = res.Response.data;
+            const data = res.response.data;
             localStorage.setItem('token', data.Token);
             localStorage.setItem('idUsuario', data.Usuario.Id.toString());
             localStorage.setItem('idPerfil', data.Usuario.IdPerfil.toString());

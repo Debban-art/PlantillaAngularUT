@@ -36,8 +36,8 @@ export class PersonasComponent {
 
   getPersons() {
     this.personService.getPersons().subscribe((data) => {
-      this.persons.set(data.Response.data);
-      this.personsList = data.Response.data;
+      this.persons.set(data.response);
+      this.personsList = data.response;
     });
   }
 

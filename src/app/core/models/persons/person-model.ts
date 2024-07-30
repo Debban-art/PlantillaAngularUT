@@ -7,18 +7,18 @@ export interface PersonInsertRequest {
     Direccion: string;
 }
 
-export type GetPersonasResponse = ApiResponse<GetPersonasResponseData>;
+export type GetPersonasResponse = ApiResponse<PersonaModel[]>;
 
 interface GetPersonasResponseData {
-    data: PersonaModel[];
+    persons: PersonaModel[];
 }
 export interface PersonaModel {
     Id: number;
     Nombre: string;
     ApPaterno: string;
     ApMaterno: string;
-    Direccion: string;
+    Direccion:string;
     Estatus: string;
     UsuarioRegistra: string;
-    FechaRegistro: string;
+    FechaRegistro:string;
 }
