@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { persons } from 'src/app/global/endpoints';
-import { PersonInsertRequest, GetPersonasResponse } from '@Models/Person'
+import { PersonInsertRequest, GetPersonasResponse, PersonUpdateRequest } from '@Models/Person'
 
 @Injectable({
   providedIn: 'root',
@@ -48,7 +48,7 @@ export class PersonasService {
     )
   }
 
-  updatePersons(person: PersonInsertRequest): Observable<boolean> {
+  updatePersons(person: PersonUpdateRequest): Observable<boolean> {
     const httpOptions = {headers:this.headers}
     return this.http.put<boolean>(persons.update, person, httpOptions)
     .pipe(

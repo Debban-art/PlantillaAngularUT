@@ -7,6 +7,14 @@ export interface PersonInsertRequest {
     Direccion: string;
 }
 
+export interface PersonUpdateRequest {
+    Id: number;
+    Nombre: string;
+    ApPaterno: string;
+    ApMaterno: string;
+    Direccion: string;
+}
+
 export type GetPersonasResponse = ApiResponse<PersonaModel[]>;
 
 interface GetPersonasResponseData {
