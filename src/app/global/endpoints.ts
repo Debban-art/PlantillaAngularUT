@@ -8,6 +8,7 @@ export const persons = {
   get: `${environment.urlBase}GetPersonas`,
   insert: `${environment.urlBase}InsertPersonas`,
   delete: `${environment.urlBase}DeletePersonas`,
+  update: `${environment.urlBase}UpdatePersonas`
 };
 
 export const profiles = {

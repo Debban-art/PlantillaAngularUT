@@ -6,6 +6,7 @@ import { PersonaModel, PersonInsertRequest } from '@Models/Person';
 import { PersonasService } from '@Services';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { EliminarPopupComponent, EliminarRegistroData } from 'src/app/layout/components/eliminar-popup/eliminar-popup.component';
+import { ActualizarPopupComponent } from 'src/app/layout/components/actualizar-popup/actualizar-popup.component';
 
 @Component({
   selector: 'app-personas',
@@ -69,7 +70,27 @@ export class PersonasComponent {
   }
 
   editPerson(data:any){
-    console.log(data)
+     const dialogRef = this.dialog.open(ActualizarPopupComponent, {
+      data: data,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Aquí llamas al servicio para actualizar la persona con los datos recibidos
+        this.personService.updatePersons(result)
+        .subscribe({
+          next: (res) => {
+            const data = res;
+            this.getPersons();
+          },
+          error: (err) => {
+            console.log(err)
+            // this.toastr.error('Ha Ocurrido un Error', err);
+          }
+      });
+        console.log('Editado:', result);
+      }
+    });
   }
 
   deletePerson(data: PersonaModel){

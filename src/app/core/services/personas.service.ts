@@ -47,4 +47,14 @@ export class PersonasService {
       })
     )
   }
+
+  updatePersons(person: PersonInsertRequest): Observable<boolean> {
+    const httpOptions = {headers:this.headers}
+    return this.http.put<boolean>(persons.update, person, httpOptions)
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )
+  }
 }
