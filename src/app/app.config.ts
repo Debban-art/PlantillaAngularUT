@@ -6,6 +6,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { routes } from './app.routes';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,6 @@ export const appConfig: ApplicationConfig = {
     })),
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     provideHttpClient(withInterceptorsFromDi()),
-    provideAnimations()
+    provideAnimations(), provideAnimationsAsync()
   ]
 };

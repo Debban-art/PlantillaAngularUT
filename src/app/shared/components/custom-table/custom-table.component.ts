@@ -19,13 +19,13 @@ export class CustomTableComponent {
   @Input() hasEdit: boolean = false;
   @Input() hasDelete: boolean = false;
   @Output() editEmit: EventEmitter<any> = new EventEmitter();
-  @Output() deleteEmit: EventEmitter<number> = new EventEmitter();
+  @Output() deleteEmit: EventEmitter<any> = new EventEmitter();
 
   editRow(data:any) {
     this.editEmit.emit(data)
   }
 
   deleteRow(data:any) {
-    this.deleteEmit.emit(data[this.keyRow])
+    this.deleteEmit.emit(data)
   }
 }

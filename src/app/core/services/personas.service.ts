@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -28,6 +28,19 @@ export class PersonasService {
   insertPersons(person:PersonInsertRequest): Observable<boolean> {
     const httpOptions = {headers:this.headers}
     return this.http.post<boolean>(persons.insert, person, httpOptions)
+    .pipe(
+      map(res => {
+        return res;
+      })
+    )
+  }
+
+  deletePersons(id: number): Observable<Boolean> {
+    const url = `${persons.delete}/${id}`;
+    const httpOptions = {
+      headers: this.headers
+    };
+    return this.http.delete<Boolean>(url,httpOptions)
     .pipe(
       map(res => {
         return res;

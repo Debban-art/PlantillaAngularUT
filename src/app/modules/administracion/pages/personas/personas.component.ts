@@ -3,20 +3,21 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomTableComponent } from '@Component/Table'
 import { PersonaModel, PersonInsertRequest } from '@Models/Person';
-import { PerfilModel } from '@Models/Profile';
-import { TiendaModel } from '@Models/Store';
-import { PersonasService, StoresService, PerfilesService } from '@Services';
+import { PersonasService } from '@Services';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { EliminarPopupComponent, EliminarRegistroData } from 'src/app/layout/components/eliminar-popup/eliminar-popup.component';
 
 @Component({
   selector: 'app-personas',
   standalone: true,
-  imports: [ReactiveFormsModule, NgFor, NgIf, CustomTableComponent],
+  imports: [ReactiveFormsModule, NgFor, NgIf, CustomTableComponent, MatDialogModule],
   templateUrl: './personas.component.html',
   styleUrl: './personas.component.css'
 })
 export class PersonasComponent {
   private fb = inject(FormBuilder);
   private personService = inject(PersonasService);
+  private dialog = inject(MatDialog);
 
   idUsuario:number = 0;
   persons = signal<PersonaModel[]>([]);
@@ -71,7 +72,25 @@ export class PersonasComponent {
     console.log(data)
   }
 
-  deletePerson(id:number){
-    console.log(id)
+  deletePerson(data: PersonaModel){
+    const dialogRef = this.dialog.open(EliminarPopupComponent, {
+      data: { id: data.Id, name: `${data.Nombre} ${data.ApPaterno} ${data.ApMaterno}`, moduleName: 'Persona'  } as EliminarRegistroData,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.personService.deletePersons(data.Id)
+        .subscribe({next: (res) => {
+          const data = res;
+          this.getPersons();
+        },
+        error: (err) => {
+          console.log(err)
+          // this.toastr.error('Ha Ocurrido un Error', err);
+        }
+      });
+        console.log('Eliminado:', data.Id);
+      }
+    });
   }
 }
