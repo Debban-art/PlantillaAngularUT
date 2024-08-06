@@ -5,5 +5,5 @@ export interface ConfigCampos {
     validators: any[];
     type: 'input' | 'select';
     options?: {value: string | number; viewValue: string}[];
-    defaultValue?: any; // Nuevo campo para valores predeterminados
+    defaultValue?: any;
 }

@@ -72,7 +72,6 @@ export class PersonasComponent {
   }
 
   editPerson(data:any){
-    console.log(data)
     const fields: ConfigCampos[] = [
       { label: 'Nombre', placeholder: 'Nombre', formControlName: 'nombre', validators: [Validators.required], type: 'input', defaultValue: data.Nombre },
       { label: 'Apellido Paterno', placeholder: 'Apellido Paterno', formControlName: 'apPaterno', validators: [Validators.required], type: 'input', defaultValue: data.ApPaterno },
@@ -80,7 +79,12 @@ export class PersonasComponent {
       { label: 'Dirección', placeholder: 'Dirección', formControlName: 'direccion', validators: [Validators.required], type: 'input', defaultValue: data.Direccion },
     ]
      const dialogRef = this.dialog.open(ActualizarPopupComponent, {
-      data: {title: 'Persona', fields: fields, data: data} as ActualizarDialogData,
+      data: {
+        title: 'Editar persona',
+        fields: fields,
+        data: data,
+        id: data.Id
+    } as ActualizarDialogData,
     });
 
     dialogRef.afterClosed().subscribe((result) => {

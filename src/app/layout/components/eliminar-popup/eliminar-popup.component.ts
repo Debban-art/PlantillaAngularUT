@@ -1,10 +1,13 @@
+//Sirve para confirmar si se desea eliminar un registro
+//Es reutilizable para cada módulo
+
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 
 
-
+// Se debe de pasar un id, el nombre del registro que se desea eliminar y el nombre del módulo
 export interface EliminarRegistroData {
   id: number;
   name: string;
