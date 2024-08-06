@@ -6,7 +6,9 @@ import { PersonaModel, PersonInsertRequest } from '@Models/Person';
 import { PersonasService } from '@Services';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { EliminarPopupComponent, EliminarRegistroData } from 'src/app/layout/components/eliminar-popup/eliminar-popup.component';
-import { ActualizarPopupComponent } from 'src/app/layout/components/actualizar-popup/actualizar-popup.component';
+import { ActualizarDialogData, ActualizarPopupComponent } from 'src/app/layout/components/actualizar-popup/actualizar-popup.component';
+import { ConfigCampos } from 'src/app/core/models/configuracion-campos/config-campos';
+
 
 @Component({
   selector: 'app-personas',
@@ -70,8 +72,15 @@ export class PersonasComponent {
   }
 
   editPerson(data:any){
+    console.log(data)
+    const fields: ConfigCampos[] = [
+      { label: 'Nombre', placeholder: 'Nombre', formControlName: 'nombre', validators: [Validators.required], type: 'input', defaultValue: data.Nombre },
+      { label: 'Apellido Paterno', placeholder: 'Apellido Paterno', formControlName: 'apPaterno', validators: [Validators.required], type: 'input', defaultValue: data.ApPaterno },
+      { label: 'Apellido Materno', placeholder: 'Apellido Materno', formControlName: 'apMaterno', validators: [Validators.required], type: 'input', defaultValue: data.ApMaterno },
+      { label: 'Dirección', placeholder: 'Dirección', formControlName: 'direccion', validators: [Validators.required], type: 'input', defaultValue: data.Direccion },
+    ]
      const dialogRef = this.dialog.open(ActualizarPopupComponent, {
-      data: data,
+      data: {title: 'Persona', fields: fields, data: data} as ActualizarDialogData,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
