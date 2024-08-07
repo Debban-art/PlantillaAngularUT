@@ -18,6 +18,20 @@ export const students = {
   update: `${environment.urlBase}UpdateAlumno`
 }
 
+export const teachers = {
+  get: `${environment.urlBase}GetProfesores`,
+  insert: `${environment.urlBase}InsertProfesor`,
+  delete: `${environment.urlBase}DeleteProfesor`,
+  update: `${environment.urlBase}UpdateProfesor`
+};
+
+export const majors = {
+  get: `${environment.urlBase}GetCarreras`,
+  insert: `${environment.urlBase}InsertCarrera`,
+  delete: `${environment.urlBase}DeleteCarrera`,
+  update: `${environment.urlBase}UpdateCarrera`
+};
+
 export const profiles = {
   get: `${environment.urlBase}GetPerfiles`
 };

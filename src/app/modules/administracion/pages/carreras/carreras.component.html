@@ -1,0 +1,53 @@
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Nueva Carrera</h3>
+            </div>
+            <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+              <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>*Nombre de la Carrera:</label>
+                            <input type="text" class="form-control" placeholder="Nombre de la Carrera" formControlName="nombreCarrera">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('nombreCarrera')?.touched && form.get('nombreCarrera')?.invalid">
+                                <span *ngIf="form.get('nombreCarrera')?.errors?.['required']">Nombre de Carrera Requerido*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>*Abreviatura:</label>
+                            <input type="text" class="form-control" placeholder="Abreviatura" formControlName="abreviatura">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('abreviatura')?.touched && form.get('abreviatura')?.invalid">
+                                <span *ngIf="form.get('abreviatura')?.errors?.['required']">Apellido Paterno Requerido*</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <app-custom-table
+        keyRow="Id"
+        [headers]="['#','Carrera','Abreviatura', 'Estatus', 'Usuario Registra', 'Fecha Registro']"
+        [keys]="['Id','NombreCarrera','Abreviatura','Estatus', 'UsuarioRegistra', 'FechaRegistro']"
+        [data]="majorsList"
+        [hasSearch]="true"
+        [hasEdit]="true"
+        [hasDelete]="true"
+        (editEmit)="editMajor($event)"
+        (deleteEmit)="deleteMajor($event)"
+    >
+    </app-custom-table>
+  </div>
+</div>
