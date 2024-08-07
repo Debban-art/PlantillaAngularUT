@@ -1,8 +1,7 @@
-import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import { persons } from 'src/app/global/endpoints';
 import { PersonInsertRequest, GetPersonasResponse, PersonUpdateRequest } from '@Models/Person'
 

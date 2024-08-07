@@ -11,6 +11,13 @@ export const persons = {
   update: `${environment.urlBase}UpdatePersonas`
 };
 
+export const students = {
+  get: `${environment.urlBase}GetAlumnos`,
+  insert: `${environment.urlBase}InsertAlumno`,
+  delete: `${environment.urlBase}DeleteAlumno`,
+  update: `${environment.urlBase}UpdateAlumno`
+}
+
 export const profiles = {
   get: `${environment.urlBase}GetPerfiles`
 };

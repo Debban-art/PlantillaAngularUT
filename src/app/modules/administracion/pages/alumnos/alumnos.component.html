@@ -1,0 +1,83 @@
+
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Formulario</h3>
+            </div>
+            <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+              <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>*Matricula:</label>
+                            <input type="text" class="form-control" placeholder="Matrícula" formControlName="matricula">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('matricula')?.touched && form.get('matricula')?.invalid">
+                                <span *ngIf="form.get('matricula')?.errors?.['required']">Matrícula Requerida*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>*Nombre:</label>
+                            <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
+                                <span *ngIf="form.get('nombre')?.errors?.['required']">Nombre Requerido*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>*Apellido Paterno:</label>
+                            <input type="text" class="form-control" placeholder="Apellido Paterno" formControlName="apPaterno">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('apPaterno')?.touched && form.get('apPaterno')?.invalid">
+                                <span *ngIf="form.get('apPaterno')?.errors?.['required']">Apellido Paterno Requerido*</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>*Apellido Materno:</label>
+                            <input type="text" class="form-control" placeholder="Apellido Materno" formControlName="apMaterno">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('apMaterno')?.touched && form.get('apMaterno')?.invalid">
+                                <span *ngIf="form.get('apMaterno')?.errors?.['required']">Apellido Materno Requerido*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>*Dirección:</label>
+                            <input type="text" class="form-control" placeholder="Dirección" formControlName="direccion">
+                            <!-- <input type="text" class="form-control" placeholder="Apellido Paterno" formControlName="idPerfil"> -->
+                            <div class="form-text text-danger text-left" *ngIf="form.get('direccion')?.touched && form.get('direccion')?.invalid">
+                                <span *ngIf="form.get('direccion')?.errors?.['required']">Dirección Requerida*</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <app-custom-table
+          keyRow="Id"
+          [headers]="['#', 'Matrícula', 'Nombre','Apellido Paterno','Apellido Materno', 'Dirección', 'Estatus', 'Usuario Registra', 'Fecha Registro']"
+          [keys]="['Id', 'Matricula','Nombre','ApPaterno','ApMaterno', 'Direccion', 'Estatus', 'UsuarioRegistra', 'FechaRegistro']"
+          [data]="studentsList"
+          [hasSearch]="true"
+          [hasEdit]="true"
+          [hasDelete]="true"
+          (editEmit)="editStudent($event)"
+          (deleteEmit)="deleteStudent($event)"
+      >
+      </app-custom-table>
+    </div>
+  </div>
