@@ -30,7 +30,12 @@ export const routes: Routes = [
                 path:'carreras',
                 loadChildren: () => import('./pages/carreras/carreras.routes').then(m => m.routes),
                 title: 'App - Dashboard'
-            }
+            },
+            {
+                path:'materias',
+                loadChildren: () => import('./pages/materias/materias.routes').then(m => m.routes),
+                title: 'App - Dashboard'
+            },
 
         ]
     },

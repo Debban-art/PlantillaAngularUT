@@ -31,7 +31,12 @@ export const majors = {
   delete: `${environment.urlBase}DeleteCarrera`,
   update: `${environment.urlBase}UpdateCarrera`
 };
-
+export const subjects = {
+  get: `${environment.urlBase}GetMaterias`,
+  insert: `${environment.urlBase}InsertMateria`,
+  delete: `${environment.urlBase}DeleteMateria`,
+  update: `${environment.urlBase}UpdateMateria`
+};
 export const profiles = {
   get: `${environment.urlBase}GetPerfiles`
 };

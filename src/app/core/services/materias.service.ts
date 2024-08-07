@@ -2,21 +2,21 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { majors } from '@Global/endpoints';
-import { MajorInserRequest, GetCarrerasResponse, MajorUpdateRequest } from '../models/majors';
+import { subjects } from 'src/app/global/endpoints';
+import { SubjectInsertRequest, GetMateriasResponse, SubjectUpdateRequest } from '../models/subjects';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CarrerasService {
+export class MateriasService {
   private headers: HttpHeaders;
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders ({})
   }
 
-  getMajors(): Observable<GetCarrerasResponse> {
+  getSubjects(): Observable<GetMateriasResponse> {
     const httpOptions = {headers:this.headers}
-    return this.http.get<GetCarrerasResponse>(majors.get, httpOptions)
+    return this.http.get<GetMateriasResponse>(subjects.get, httpOptions)
     .pipe(
       map(res => {
         return res;
@@ -24,9 +24,9 @@ export class CarrerasService {
     )
   }
 
-  insertMajor(major:MajorInserRequest): Observable<boolean> {
+  insertSubject(subject:SubjectInsertRequest): Observable<boolean> {
     const httpOptions = {headers:this.headers}
-    return this.http.post<boolean>(majors.insert, major, httpOptions)
+    return this.http.post<boolean>(subjects.insert, subject, httpOptions)
     .pipe(
       map(res => {
         return res;
@@ -34,8 +34,8 @@ export class CarrerasService {
     )
   }
 
-  deleteMajor(id: number): Observable<Boolean> {
-    const url = `${majors.delete}/${id}`; 
+  deleteSubject(id: number): Observable<Boolean> {
+    const url = `${subjects.delete}/${id}`;
     const httpOptions = {headers: this.headers};
     return this.http.delete<Boolean>(url,httpOptions)
     .pipe(
@@ -45,10 +45,9 @@ export class CarrerasService {
     )
   }
 
-  //Función para actualizar un registro
-  updateMajors(major: MajorUpdateRequest): Observable<boolean> {
+  updatePersons(subject: SubjectUpdateRequest): Observable<boolean> {
     const httpOptions = {headers:this.headers}
-    return this.http.put<boolean>(majors.update, major, httpOptions)
+    return this.http.put<boolean>(subjects.update, subject, httpOptions)
     .pipe(
       map(res => {
         return res;
@@ -56,4 +55,3 @@ export class CarrerasService {
     )
   }
 }
-

@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Nueva Materia</h3>
+            </div>
+            <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+              <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>*Nombre:</label>
+                            <input type="text" class="form-control" placeholder="Nombre" formControlName="nombreMateria">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('nombreMateria')?.touched && form.get('nombreMateria')?.invalid">
+                                <span *ngIf="form.get('nombreMateria')?.errors?.['required']">Materia Requerida*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>*Clave:</label>
+                            <input type="text" class="form-control" placeholder="Clave" formControlName="claveMateria">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('claveMateria')?.touched && form.get('claveCarrera')?.invalid">
+                                <span *ngIf="form.get('claveMateria')?.errors?.['required']">Clave Requerida*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>*Carrera:</label>
+                            <select class="form-control" formControlName="idCarrera">
+                                <option *ngFor="let major of majorsList" [value]="major.Id">{{major.Abreviatura}}</option>
+                            </select>
+                            <div class="form-text text-danger text-left" *ngIf="form.get('idCarrera')?.touched && form.get('idCarrera')?.invalid">
+                                <span *ngIf="form.get('idCarrera')?.errors?.['required']">Carrera Requerida*</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <app-custom-table
+          keyRow="Id"
+          [headers]="['#','Materia','Clave','Carrera', 'Estatus', 'Usuario Registra', 'Fecha Registro']"
+          [keys]="['Id','NombreMateria','ClaveMateria','ClaveCarrera', 'Estatus', 'UsuarioRegistra', 'FechaRegistro']"
+          [data]="subjectsList"
+          [hasSearch]="true"
+          [hasEdit]="true"
+          [hasDelete]="true"
+          (editEmit)="editSubject($event)"
+          (deleteEmit)="deleteSubject($event)"
+      >
+      </app-custom-table>
+    </div>
+  </div>
