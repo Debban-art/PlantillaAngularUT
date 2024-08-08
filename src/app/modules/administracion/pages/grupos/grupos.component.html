@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Nuevo Grupo</h3>
+            </div>
+            <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+              <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>*Nombre:</label>
+                            <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid">
+                                <span *ngIf="form.get('nombre')?.errors?.['required']">Nombre de grupo Requerido*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>*Clave:</label>
+                            <input type="text" class="form-control" placeholder="Clave" formControlName="clave">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('clave')?.touched && form.get('clave')?.invalid">
+                                <span *ngIf="form.get('clave')?.errors?.['required']">Clave Requerida*</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <app-custom-table
+          keyRow="Id"
+          [headers]="['#','Grupo','Clave','Estatus', 'Usuario Registra', 'Fecha Registro']"
+          [keys]="['Id','Nombre','Clave','Estatus', 'UsuarioRegistra', 'FechaRegistro']"
+          [data]="groupsList"
+          [hasSearch]="true"
+          [hasEdit]="true"
+          [hasDelete]="true"
+          (editEmit)="editGroup($event)"
+          (deleteEmit)="deleteGroup($event)"
+      >
+      </app-custom-table>
+    </div>
+  </div>
