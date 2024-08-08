@@ -45,7 +45,7 @@ export class MateriasService {
     )
   }
 
-  updatePersons(subject: SubjectUpdateRequest): Observable<boolean> {
+  updateSubject(subject: SubjectUpdateRequest): Observable<boolean> {
     const httpOptions = {headers:this.headers}
     return this.http.put<boolean>(subjects.update, subject, httpOptions)
     .pipe(

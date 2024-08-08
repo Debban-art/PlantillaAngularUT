@@ -74,28 +74,76 @@ export class MateriasComponent {
         IdCarrera: Number(idCarrera)
       };
       console.log(request);
-      // this.subjectService.insertSubject(request)
-      //   .subscribe({
-      //     next: (res) => {
-      //       const data = res;
-      //       this.getSubjects();
-      //       this.getMajors();
-      //     },
-      //     error: (err) => {
-      //       console.log(err)
-      //       // this.toastr.error('Ha Ocurrido un Error', err);
-      //     }
-      // });
+      this.subjectService.insertSubject(request)
+        .subscribe({
+          next: (res) => {
+            const data = res;
+            this.getSubjects();
+            this.getMajors();
+          },
+          error: (err) => {
+            console.log(err)
+            // this.toastr.error('Ha Ocurrido un Error', err);
+          }
+      });
     } else {
       this.form.markAllAsTouched();
     }
   }
 
   editSubject(data:any){
-    console.log(data);
+    const fields: ConfigCampos[] = [
+      { label: 'Nombre', placeholder: 'Nombre', formControlName: 'nombreMateria', validators: [Validators.required], type: 'input', defaultValue: data.NombreMateria },
+      { label: 'Clave', placeholder: 'Clave', formControlName: 'claveMateria', validators: [Validators.required], type: 'input', defaultValue: data.ClaveMateria },
+      { label: 'Carrera', placeholder: 'Carrera', formControlName: 'idCarrera', validators: [Validators.required], type: 'select', options: this.majorsList.map(major => ({ value: major.Id, viewValue: major.Abreviatura })),defaultValue: data.IdCarrera },
+    ]
+     const dialogRef = this.dialog.open(ActualizarPopupComponent, {
+      data: {
+        title: 'Editar materia',
+        fields: fields,
+        data: data,
+        id: data.Id
+    } as ActualizarDialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Aquí llamas al servicio para actualizar la persona con los datos recibidos
+        this.subjectService.updateSubject(result)
+        .subscribe({
+          next: (res) => {
+            const data = res;
+            this.getSubjects();
+          },
+          error: (err) => {
+            console.log(err)
+            // this.toastr.error('Ha Ocurrido un Error', err);
+          }
+      });
+        console.log('Editado:', result);
+      }
+    });
   }
 
   deleteSubject(data: MateriaModel){
-    console.log(data)
+    const dialogRef = this.dialog.open(EliminarPopupComponent, {
+      data: { id: data.Id, name: data.NombreMateria, moduleName: 'Materia'  } as EliminarRegistroData,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.subjectService.deleteSubject(data.Id)
+        .subscribe({next: (res) => {
+          const data = res;
+          this.getSubjects();
+        },
+        error: (err) => {
+          console.log(err)
+          // this.toastr.error('Ha Ocurrido un Error', err);
+        }
+      });
+        console.log('Eliminado:', data.Id);
+      }
+    });
   }
 }
