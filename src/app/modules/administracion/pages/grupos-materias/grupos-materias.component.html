@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Nueva Materia en Grupo</h3>
+            </div>
+            <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+              <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>*Materia:</label>
+                            <select class="form-control" formControlName="idMateria">
+                                <option *ngFor="let subject of subjectsList" [value]="subject.Id">{{subject.ClaveMateria}}</option>
+                            </select>                            
+                            <div class="form-text text-danger text-left" *ngIf="form.get('idMateria')?.touched && form.get('idMateria')?.invalid">
+                                <span *ngIf="form.get('idMateria')?.errors?.['required']">Materia Requerida*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>*Grupo:</label>
+                            <select class="form-control" formControlName="idGrupo">
+                                <option *ngFor="let group of groupsList" [value]="group.Id">{{group.Clave}}</option>
+                            </select>
+                            <div class="form-text text-danger text-left" *ngIf="form.get('idGrupo')?.touched && form.get('idGrupo')?.invalid">
+                                <span *ngIf="form.get('idGrupo')?.errors?.['required']">Carrera Requerida*</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <app-custom-table
+          keyRow="Id"
+          [headers]="['#','Grupo','Materia','Carrera', 'Estatus', 'Usuario Registra', 'Fecha Registro']"
+          [keys]="['Id','Grupo','Materia','Carrera', 'Estatus', 'UsuarioRegistra', 'FechaRegistro']"
+          [data]="groupSubjectsList"
+          [hasSearch]="true"
+          [hasEdit]="true"
+          [hasDelete]="true"
+          (editEmit)="editGroupSubject($event)"
+          (deleteEmit)="deleteGroupSubject($event)"
+      >
+      </app-custom-table>
+    </div>
+  </div>

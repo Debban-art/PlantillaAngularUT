@@ -49,6 +49,18 @@ export const groupsStudents = {
   delete: `${environment.urlBase}DeleteGrupoAlumno`,
   update: `${environment.urlBase}UpdateGruposAlumnos`
 };
+export const groupsSubjects = {
+  get: `${environment.urlBase}GetGruposMaterias`,
+  insert: `${environment.urlBase}InsertGrupoMateria`,
+  delete: `${environment.urlBase}DeleteGrupoMateria`,
+  update: `${environment.urlBase}UpdateGrupoMateria`
+};
+export const grades = {
+  get: `${environment.urlBase}GetCalificaciones`,
+  insert: `${environment.urlBase}InsertCalificacion`,
+  delete: `${environment.urlBase}DeleteCalificacion`,
+  update: `${environment.urlBase}UpdateCalificacion`
+};
 export const profiles = {
   get: `${environment.urlBase}GetPerfiles`
 };

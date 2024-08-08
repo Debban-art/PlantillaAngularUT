@@ -46,6 +46,16 @@ export const routes: Routes = [
                 loadChildren: () => import('./pages/groups-students/groups-students.routes').then(m => m.routes),
                 title: 'App - Dashboard'
             },
+            {
+                path:'gruposMaterias',
+                loadChildren: () => import('./pages/grupos-materias/grupos-materias.routes').then(m => m.routes),
+                title: 'App - Dashboard'
+            },
+            {
+                path:'calificaciones',
+                loadChildren: () => import('./pages/calificaciones/calificaciones.routes').then(m => m.routes),
+                title: 'App - Dashboard'
+            },
 
         ]
     },
