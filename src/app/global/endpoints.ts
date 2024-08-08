@@ -46,8 +46,8 @@ export const groups = {
 export const groupsStudents = {
   get: `${environment.urlBase}GetGruposAlumnos`,
   insert: `${environment.urlBase}InsertGrupoAlumno`,
-  delete: `${environment.urlBase}DeleteGruposAlumnos`,
-  update: `${environment.urlBase}UpdateGrupoAlumno`
+  delete: `${environment.urlBase}DeleteGrupoAlumno`,
+  update: `${environment.urlBase}UpdateGruposAlumnos`
 };
 export const profiles = {
   get: `${environment.urlBase}GetPerfiles`

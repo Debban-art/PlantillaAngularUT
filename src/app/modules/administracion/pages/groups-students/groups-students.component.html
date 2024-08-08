@@ -1,1 +1,54 @@
-<p>groups-students works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">Nuevo Alumno en grupo</h3>
+            </div>
+            <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
+              <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>*Matricula:</label>
+                            <input type="text" class="form-control" placeholder="Nombre" formControlName="matricula">
+                            <div class="form-text text-danger text-left" *ngIf="form.get('matricula')?.touched && form.get('matricula')?.invalid">
+                                <span *ngIf="form.get('matricula')?.errors?.['required']">Matricula Requerida*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label>*Grupo:</label>
+                            <select class="form-control" formControlName="idGrupo">
+                                <option *ngFor="let group of groupsList" [value]="group.Id">{{group.Clave}}</option>
+                            </select>
+                            <div class="form-text text-danger text-left" *ngIf="form.get('idGrupo')?.touched && form.get('idGrupo')?.invalid">
+                                <span *ngIf="form.get('idGrupo')?.errors?.['required']">Carrera Requerida*</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+      <app-custom-table
+          keyRow="Id"
+          [headers]="['#','Grupo','Matricula','Alumno', 'Estatus', 'Usuario Registra', 'Fecha Registro']"
+          [keys]="['Id','Grupo','Matricula','Alumno', 'Estatus', 'UsuarioRegistra', 'FechaRegistro']"
+          [data]="groupStudentsList"
+          [hasSearch]="true"
+          [hasEdit]="true"
+          [hasDelete]="true"
+          (editEmit)="editGroupStudent($event)"
+          (deleteEmit)="deleteGroupStudent($event)"
+      >
+      </app-custom-table>
+    </div>
+  </div>
