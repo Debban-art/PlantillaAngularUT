@@ -36,27 +36,63 @@ export class LoginComponent {
         username: usuario,
         userpassword: password
       };
-      this.auth.auth(request)
-        .subscribe({
-          next: (res) => {
-            const data = res.response.data;
+      // this.auth.auth(request)
+      //   .subscribe({
+      //     next: (res) => {
+      //       console.log(res);
+      //       const data = res.response.data;
+      //       localStorage.setItem('token', data.Token);
+      //       localStorage.setItem('idUsuario', data.Usuario.Id.toString());
+      //       localStorage.setItem('usuario', data.Usuario.NombreUsuario);
+      //       localStorage.setItem('nombrePersona', data.Usuario.NombrePersona);
+      //       if (!localStorage.getItem('mode')) {
+      //         localStorage.setItem('mode', 'light');
+      //       }
+      //       this.router.navigate(['/home']);
+      //     },   
+      //     error: (err) => {
+      //             this.toastr.error('Ha Ocurrido un Error', err);
+      //     }
+          
+      //   });
+      this.auth.auth(request).subscribe({
+        next: (res) => {
+          const data = res.response.data;
+            console.log(data)
             localStorage.setItem('token', data.Token);
             localStorage.setItem('idUsuario', data.Usuario.Id.toString());
-            localStorage.setItem('idPerfil', data.Usuario.IdPerfil.toString());
             localStorage.setItem('usuario', data.Usuario.NombreUsuario);
             localStorage.setItem('nombrePersona', data.Usuario.NombrePersona);
-            localStorage.setItem('idSucursal', data.Usuario.IdSucursal.toString());
-            localStorage.setItem('sucursal', data.Usuario.NombreSucursal);
-            localStorage.setItem('pctDescuento', data.Usuario.PctDescuento.toString());
-            if(!localStorage.getItem('mode')){
+            if (!localStorage.getItem('mode')) {
               localStorage.setItem('mode', 'light');
             }
             this.router.navigate(['/home']);
-          },
-          error: (err) => {
-            this.toastr.error('Ha Ocurrido un Error', err);
-          }
-        });
+        
+            this.toastr.error('Respuesta inesperada de la API.');
+          
+        },
+        error: (err) => {
+          this.toastr.error('Ha Ocurrido un Error', err);
+        }
+      });                                     
+      // this.auth.auth(request)
+      //   .subscribe({
+      //     next: (res) => {
+      //       const data = res.response?.data;
+      //       console.log(res.response)
+      //       localStorage.setItem('token', data.Token);
+      //       localStorage.setItem('idUsuario', data.Usuario.Id.toString());
+      //       localStorage.setItem('usuario', data.Usuario.NombreUsuario);
+      //       localStorage.setItem('nombrePersona', data.Usuario.NombrePersona);
+      //       if(!localStorage.getItem('mode')){
+      //         localStorage.setItem('mode', 'light');
+      //       }
+      //       this.router.navigate(['/home']);
+      //     },
+      //     error: (err) => {
+      //       this.toastr.error('Ha Ocurrido un Error', err);
+      //     }
+      //   });
     } else {
       this.form.markAllAsTouched();
     }
